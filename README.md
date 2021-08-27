@@ -1,4 +1,4 @@
-# coauthor README
+# Co-Author for VSCode
 
 Based on [git-coauthors](https://github.com/rjimenezda/vscode-coauthor) and compatible with the [Co-Author - plugin for JetBrains IDEs](https://github.com/hawser86/co-author-plugin)
 
