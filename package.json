@@ -1,7 +1,7 @@
 {
-	"name": "coauthor",
-	"displayName": "co-author",
-	"description": "",
+	"name": "co-author",
+	"displayName": "Co-Author extension for Visual Studio Code",
+	"description": "Easily adds co-authored-by strings to your commit message, compatible with the Co-Author - plugin for JetBrains IDEs",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.59.0"
