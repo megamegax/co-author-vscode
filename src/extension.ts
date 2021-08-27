@@ -22,10 +22,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const authoring = new CoAuthoring(gitExt.exports);
 	context.subscriptions.push(authoring);
-
-
-	//	fs.writeFileSync(filePath, content, 'utf8');
-	console.log('Congratulations, your extension "coauthor" is now active!');
 }
 
 
@@ -58,19 +54,19 @@ class CoAuthoring {
 	private pairingSet: Set<string> = new Set();
 	private repos: Map<string, Repo> = new Map();
 	private currentRepo: string | undefined;
-	private coAuthors: string[];
+	private coAuthors: string[] = [];
+	private CO_AUTHOR_FILE_NAME = ".git_coauthors";
 	constructor(gitApi: any) {
 		this.gitApi = gitApi;
-		const path = require('path');
-		const fs = require('fs');
-		const os = require('os');
-		const filePath = path.join(os.homedir(), '.coauthor');
-		this.coAuthors = fs.readFileSync(filePath, 'utf8').split("\n");
+		this.readOrCreateCoAuthorFile();
+
 		const addBuddy = vscode.commands.registerCommand('coauthor.addBuddy', this.addBuddy, this);
 		const appendPairing = vscode.commands.registerCommand('coauthor.appendPairing', this.appendPairing, this);
 		const stopPairing = vscode.commands.registerCommand('coauthor.stopPairing', this.stopPairing, this);
-		//const selectRepo = vscode.commands.registerCommand('coauthor.selectRepo', this.pickRepo, this);
-		let showCoAuthors = vscode.commands.registerCommand('coauthor.showCoAuthors', () => {
+		let showCoAuthors = vscode.commands.registerCommand('coauthor.editCoAuthors', () => {
+			const path = require('path');
+			const os = require('os');
+			const filePath = path.join(os.homedir(), this.CO_AUTHOR_FILE_NAME);
 
 			const openPath = vscode.Uri.file(filePath);
 			vscode.workspace.openTextDocument(openPath).then(doc => {
@@ -83,10 +79,21 @@ class CoAuthoring {
 		this.disposables.push(showCoAuthors);
 		this.disposables.push(addBuddy);
 		this.disposables.push(stopPairing);
-		//	this.disposables.push(selectRepo);
 		this.disposables.push(appendPairing);
 	}
 
+	public readOrCreateCoAuthorFile() {
+		const path = require('path');
+		const fs = require('fs');
+		const os = require('os');
+		const filePath = path.join(os.homedir(), this.CO_AUTHOR_FILE_NAME);
+		try {
+			this.coAuthors = fs.readFileSync(filePath, 'utf8').split("\n");
+		} catch (e) {
+			fs.writeFileSync(filePath, 'name <name@email.com>');
+			this.coAuthors = [];
+		}
+	}
 	public async addBuddy() {
 		if (this.repos.size === 0) {
 			await this._getRepos();
@@ -99,8 +106,7 @@ class CoAuthoring {
 		if (this.currentRepo === undefined) {
 			return;
 		}
-
-
+		this.readOrCreateCoAuthorFile();
 		this._pickBuddy(this.coAuthors);
 	}
 	public async appendPairing() {
@@ -144,7 +150,6 @@ class CoAuthoring {
 
 	public getPairingString() {
 		return [...this.pairingSet.values()]
-			.map(buddy => `Co-authored-by: ${buddy}`)
 			.join('\n');
 	}
 

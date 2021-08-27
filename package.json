@@ -16,7 +16,7 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "coauthor.showCoAuthors",
+				"command": "coauthor.editCoAuthors",
 				"title": "Edit authors list",
 				"category": "Co-Author"
 			},
