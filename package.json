@@ -2,7 +2,13 @@
 	"name": "co-author",
 	"displayName": "Co-Author extension for Visual Studio Code",
 	"description": "Easily adds co-authored-by strings to your commit message, compatible with the Co-Author - plugin for JetBrains IDEs",
-	"version": "0.0.1",
+	"icon": "icon.png",
+	"version": "0.1.0",
+	"publisher":"megamegax",
+	"repository": {
+        "type": "git",
+        "url": "https://github.com/megamegax/co-author-vscode.git"
+    },
 	"engines": {
 		"vscode": "^1.59.0"
 	},
