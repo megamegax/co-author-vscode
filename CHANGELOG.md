@@ -1,3 +1,3 @@
 # Change Log
 
-* Initial release
+* write Co-authored-by: automatically before the co-author's name

@@ -3,7 +3,7 @@
 	"displayName": "Co-Author extension for Visual Studio Code",
 	"description": "Easily adds co-authored-by strings to your commit message, compatible with the Co-Author - plugin for JetBrains IDEs",
 	"icon": "icon.png",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"publisher":"megamegax",
 	"repository": {
         "type": "git",

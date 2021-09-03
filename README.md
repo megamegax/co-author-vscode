@@ -10,7 +10,7 @@ Just select 'Change pairing buddies' and a list of the repo contributors will sh
 
 Whenever you're ready to write a commit, run the command 'Add co-author strings', and the extension will automatically add the name & email so github can identify them.
 
-\!\[feature X\]\(images/feature-x.png\)
+![example](example.png)
 
 
 
