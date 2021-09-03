@@ -16,8 +16,6 @@ Whenever you're ready to write a commit, run the command 'Add co-author strings'
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 0.1.0
 
 Initial release of Co-Author
